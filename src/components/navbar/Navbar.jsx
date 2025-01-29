@@ -8,17 +8,14 @@ function Navbar() {
   return (
     <div className={styles.container}>
       <div className={styles.social}>
-        <Image src="/facebook.png" alt="facebook" width={24} height={24} />
-        <Image src="/instagram.png" alt="instagram" width={24} height={24} />
-        <Image src="/tiktok.png" alt="tiktok" width={24} height={24} />
-        <Image src="/youtube.png" alt="youtube" width={24} height={24} />
+        <Image src="/logo.jpg" alt="logo" width={100} height={70} />
       </div>
-      <div className={styles.logo}> Fanfan blog</div>
+      <div className={styles.logo}> Hooker</div>
       <div className={styles.links}>
         <ThemeToggle />
         <Link href="/" className={styles.link}>
           {" "}
-          Homepage
+          Accueil
         </Link>
         <Link href="/contact" className={styles.link}>
           {" "}
@@ -26,7 +23,7 @@ function Navbar() {
         </Link>
         <Link href="/about" className={styles.link}>
           {" "}
-          About
+          A propos
         </Link>
         <AuthLinks />
       </div>

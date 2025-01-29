@@ -6,8 +6,9 @@ import { NextResponse } from "next/server";
 export const GET = async (req) => {
   const { searchParams } = new URL(req.url);
 
-  const page = searchParams.get("page");
+  const page = searchParams.get("page") ?? 1;
   const cat = searchParams.get("cat");
+  const isFeatured = searchParams.get("isFeatured") === "true";
 
   const POST_PER_PAGE = 4;
 
@@ -16,6 +17,7 @@ export const GET = async (req) => {
     skip: POST_PER_PAGE * (page - 1),
     where: {
       ...(cat && { catSlug: cat }),
+      ...(isFeatured && { isFeatured: true }),
     },
   };
 
