@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  margin-top: 15px;
 }
 
 .select {
@@ -32,7 +33,7 @@
 }
 
 .addButton {
-  border-color: #1a8917;
+  border-color: #fcc613;
 }
 
 .add {
@@ -68,8 +69,11 @@
   right: 0px;
   padding: 10px 20px;
   border: none;
-  background-color: #1a8917;
+  background-color: #fcc613;
   color: white;
   cursor: pointer;
   border-radius: 20px;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 18px;
 }

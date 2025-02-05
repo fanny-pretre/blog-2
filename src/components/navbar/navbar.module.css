@@ -1,28 +1,26 @@
 .container {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 100px;
-}
-
-.social {
-  display: flex;
-  gap: 10px;
-  flex: 1;
+  width: 100vw;
+  z-index: 1000;
+  padding: 0 1.5rem 0;
+  background-color: #ff0045;
 }
 
 .logo {
-  flex: 1;
-  font-size: 36px;
-  font-weight: bold;
+  margin-left: 20%;
 }
 
 .links {
   display: flex;
   gap: 20px;
-  flex: 1.5;
-  font-size: 20px;
+
+  font-size: 18px;
   align-items: center;
+  color: #fffbf3;
 }
 
 @media screen and (max-width: 1280px) {

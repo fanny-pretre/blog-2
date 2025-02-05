@@ -8,11 +8,13 @@ function Navbar() {
   return (
     <div className={styles.container}>
       <div className={styles.social}>
-        <Image src="/logo.jpg" alt="logo" width={100} height={70} />
-      </div>
-      <div className={styles.logo}> Hooker</div>
-      <div className={styles.links}>
         <ThemeToggle />
+      </div>
+      <div className={styles.logo}>
+        {" "}
+        <Image src="/logo-1.png" alt="logo" width={190} height={100} />
+      </div>
+      <div className={styles.links}>
         <Link href="/" className={styles.link}>
           {" "}
           Accueil

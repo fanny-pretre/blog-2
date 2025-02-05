@@ -85,7 +85,7 @@ const WritePage = () => {
     <div className={styles.container}>
       <input
         type="text"
-        placeholder="Title"
+        placeholder="Titre"
         className={styles.input}
         onChange={(e) => setTitle(e.target.value)}
       />
@@ -129,7 +129,7 @@ const WritePage = () => {
         <div ref={quillRef} className={`${styles.textArea}`} />
       </div>
       <button className={styles.publish} onClick={handleSubmit}>
-        Publish
+        Publier
       </button>
     </div>
   );

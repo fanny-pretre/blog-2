@@ -1,6 +1,11 @@
+"use client";
+
 import React from "react";
 import styles from "./featured.module.css";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+
+import DOMPurify from "dompurify";
 
 const getData = async (isFeatured) => {
   const res = await fetch(
@@ -17,27 +22,47 @@ const getData = async (isFeatured) => {
   return res.json();
 };
 
-const Featured = async () => {
-  const featuredPost = await getData(true);
+const Featured = () => {
+  const [safeDescription, setSafeDescription] = useState("");
+  const [featuredPost, setFeaturedPost] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getData(true);
+        if (data.posts && data.posts.length > 0) {
+          setFeaturedPost(data.posts[0]);
+          setSafeDescription(DOMPurify.sanitize(data.posts[0].desc));
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (!featuredPost) {
+    return <p>Chargement...</p>;
+  }
+
   console.log(featuredPost);
+
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>
-        <p> Passe les pelotes, c&apos;est moi qui tricote !</p>
-      </h1>
       <div className={styles.post}>
         <div className={styles.imgContainer}>
-          <Image src="/p1.jpeg" alt="" fill className={styles.image} />
+          <Image src={featuredPost.img} alt="" fill className={styles.image} />
         </div>
         <div className={styles.textContainer}>
-          <h1 className={styles.postTitle}>{featuredPost.posts[0].title}</h1>
-          <p className={styles.postDesc}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Cupiditate, quam nisi magni ea laborum inventore voluptatum
-            laudantium repellat ducimus unde aspernatur fuga. Quo, accusantium
-            quisquam! Harum unde sit culpa debitis.
-          </p>
-          <button className={styles.button}>Read More</button>
+          <h1 className={styles.postTitle}>{featuredPost.title}</h1>
+          <p
+            className={styles.postDesc}
+            dangerouslySetInnerHTML={{ __html: safeDescription }}
+          />
+          <a className={styles.button} href={`/posts/${featuredPost.slug}`}>
+            En savoir plus
+          </a>
         </div>
       </div>
     </div>
