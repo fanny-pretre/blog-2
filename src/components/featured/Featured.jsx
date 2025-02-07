@@ -50,6 +50,13 @@ const Featured = () => {
 
   return (
     <div className={styles.container}>
+      <Image
+        src="/hot.png"
+        alt=""
+        className={styles.hot}
+        width={150}
+        height={150}
+      />
       <div className={styles.post}>
         <div className={styles.imgContainer}>
           <Image src={featuredPost.img} alt="" fill className={styles.image} />

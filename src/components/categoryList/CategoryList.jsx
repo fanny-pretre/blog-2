@@ -18,7 +18,7 @@ const CategoryList = async () => {
   const data = await getData();
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Popular Categories</h1>
+      <h1 className={styles.title}>Nos catégories stars</h1>
       <div className={styles.categories}>
         {data?.map((item) => (
           <Link
@@ -33,8 +33,8 @@ const CategoryList = async () => {
               <Image
                 src={item.img}
                 alt=""
-                width={32}
-                height={32}
+                width={40}
+                height={40}
                 className={styles.image}
               />
             )}

@@ -18,30 +18,14 @@
   height: 80px;
   justify-content: center;
   border-radius: 10px;
+  background-color: #ffcad3;
+  color: #0f172a;
+  font-weight: 700;
 }
 
-.category.style {
-  background-color: #57c4ff31;
-}
-
-.category.fashion {
-  background-color: #da85c731;
-}
-
-.category.food {
-  background-color: #7fb88133;
-}
-
-.category.travel {
-  background-color: #ff795736;
-}
-
-.category.culture {
-  background-color: #ffb04f45;
-}
-
-.category.coding {
-  background-color: #5e4fff31;
+.category:hover {
+  background-color: #ff0045;
+  color: #ffffff;
 }
 
 .image {
