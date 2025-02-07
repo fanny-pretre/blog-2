@@ -31,12 +31,7 @@ const MenuPosts = ({ withImage }) => {
   return (
     <div className={styles.items}>
       {posts.map((item) => (
-        <Link href="/" key={item.id} className={styles.item}>
-          {withImage && (
-            <div className={styles.imageContainer}>
-              <Image src="/p1.jpeg" alt="" fill className={styles.image} />
-            </div>
-          )}
+        <div key={item.id} className={styles.item}>
           <div className={styles.textContainer}>
             <Link
               href={{
@@ -63,7 +58,7 @@ const MenuPosts = ({ withImage }) => {
               </div>
             </Link>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );
