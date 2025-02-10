@@ -13,7 +13,7 @@ function Pagination({ page, hasPrev, hasNext }) {
         disabled={!hasPrev}
       >
         {" "}
-        Previous{" "}
+        Précédent{" "}
       </button>
       <button
         className={styles.button}
@@ -21,7 +21,7 @@ function Pagination({ page, hasPrev, hasNext }) {
         disabled={!hasNext}
       >
         {" "}
-        Next{" "}
+        Suivant{" "}
       </button>
     </div>
   );

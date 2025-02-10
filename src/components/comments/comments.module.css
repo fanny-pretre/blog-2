@@ -3,7 +3,7 @@
 }
 
 .title {
-  color: var(--softTextColor);
+  color: #0f172a;
   margin-bottom: 30px;
 }
 
@@ -20,13 +20,19 @@
 }
 
 .button {
+  width: 110px;
   padding: 16px 20px;
-  background-color: teal;
-  color: white;
-  font-weight: bold;
   border: none;
   border-radius: 5px;
+  background-color: #ffcad3;
   cursor: pointer;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.button:hover {
+  background-color: #ff0045;
+  color: #ffffff;
 }
 
 .comments {

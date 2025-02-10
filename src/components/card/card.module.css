@@ -15,6 +15,27 @@
   object-fit: cover;
 }
 
+.label {
+  position: absolute;
+  z-index: 100;
+  margin-bottom: -17rem;
+  margin-left: 22rem;
+  border-radius: 10px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .textContainer {
   flex: 1;
   display: flex;

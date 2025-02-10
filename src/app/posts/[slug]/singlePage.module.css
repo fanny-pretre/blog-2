@@ -2,10 +2,11 @@
   display: flex;
   align-items: center;
   gap: 50px;
+  margin-top: 50px;
 }
 
 .textContainer {
-  flex: 1;
+  flex: 1.5;
 }
 
 .title {
@@ -50,11 +51,11 @@
 
 .image {
   object-fit: cover;
+  border-radius: 12px;
 }
 
 .content {
   display: flex;
-  gap: 50px;
 }
 
 .post {
@@ -62,10 +63,33 @@
   margin-top: 60px;
 }
 
+.description {
+  width: 90%;
+}
+
+.description h2 {
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
 .description p {
   font-size: 20px;
   font-weight: 300;
-  margin-bottom: 20px;
+}
+
+.description ol {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 20px;
+  font-weight: 300;
+  padding: 2rem;
+}
+
+.description img {
+  display: block;
+  margin: 0 auto;
+  width: 70%;
 }
 
 @media screen and (max-width: 1536px) {

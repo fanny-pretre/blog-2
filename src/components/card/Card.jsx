@@ -15,9 +15,18 @@ function Card({ item }) {
   return (
     <div className={styles.container}>
       {item.img && (
-        <div className={styles.imageContainer}>
-          <Image src={item.img} alt="" fill className={styles.image} />
-        </div>
+        <>
+          <div className={styles.imageContainer}>
+            <Image src={item.img} alt="" fill className={styles.image} />
+          </div>
+          <Image
+            src="/new.png"
+            alt=""
+            className={styles.label}
+            width={150}
+            height={30}
+          />
+        </>
       )}
       <div className={styles.textContainer}>
         <div className={styles.detail}>

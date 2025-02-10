@@ -3,40 +3,50 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import styles from "./menuPosts.module.css";
+import styles from "./menuFavorites.module.css";
 
-const MenuPosts = ({ withImage }) => {
+const MenuFavorites = () => {
   const [posts, setPosts] = useState([]);
 
-  // Récupération des posts
   useEffect(() => {
-    const fetchPopularPosts = async () => {
+    const fetchFavoritePosts = async () => {
       try {
-        const res = await fetch("/api/posts?sort=popular&page=1"); // Récupérer les posts les plus populaires
+        const res = await fetch("/api/posts?isFavorite=true&sort=favorite");
         if (!res.ok)
-          throw new Error(
-            "Erreur lors de la récupération des posts populaires"
-          );
+          throw new Error("Erreur lors de la récupération des posts préférés");
 
         const data = await res.json();
-        setPosts(data.posts.slice(0, 5)); // Limite à 5 posts
+        setPosts(data.posts.slice(0, 5));
       } catch (error) {
         console.error("Erreur:", error);
       }
     };
 
-    fetchPopularPosts();
+    fetchFavoritePosts();
   }, []);
 
   return (
     <div className={styles.items}>
       {posts.map((item) => (
-        <Link href="/" key={item.id} className={styles.item}>
-          {withImage && (
-            <div className={styles.imageContainer}>
-              <Image src="/p1.jpeg" alt="" fill className={styles.image} />
-            </div>
+        <div key={item.id} className={styles.item}>
+          {item.img ? (
+            <Image
+              src={item.img}
+              alt=""
+              className={styles.image}
+              width={60}
+              height={60}
+            />
+          ) : (
+            <Image
+              src="/p1.jpeg"
+              alt=""
+              className={styles.image}
+              width={60}
+              height={60}
+            />
           )}
+
           <div className={styles.textContainer}>
             <Link
               href={{
@@ -63,10 +73,10 @@ const MenuPosts = ({ withImage }) => {
               </div>
             </Link>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );
 };
 
-export default MenuPosts;
+export default MenuFavorites;

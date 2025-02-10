@@ -8,6 +8,13 @@
   z-index: 1000;
   padding: 0 1.5rem 0;
   background-color: #ff0045;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.social {
+  display: flex;
+  gap: 10px;
 }
 
 .logo {

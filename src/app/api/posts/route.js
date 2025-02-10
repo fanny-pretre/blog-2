@@ -8,6 +8,7 @@ export const GET = async (req) => {
   const page = parseInt(searchParams.get("page") ?? 1);
   const cat = searchParams.get("cat");
   const isFeatured = searchParams.get("isFeatured") === "true";
+  const isFavorite = searchParams.get("isFavorite") === "true";
   const sort = searchParams.get("sort"); // Ajout d'un paramètre pour le tri
 
   const POST_PER_PAGE = 5;
@@ -18,6 +19,7 @@ export const GET = async (req) => {
     where: {
       ...(cat && { catSlug: cat }),
       ...(isFeatured && { isFeatured: true }),
+      ...(isFavorite && { isFavorite: true }),
     },
     orderBy:
       sort === "popular"

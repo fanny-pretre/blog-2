@@ -40,20 +40,20 @@ const Comments = ({ postSlug }) => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Comments</h1>
+      <h1 className={styles.title}>Commentaires</h1>
       {status === "authenticated" ? (
         <div className={styles.write}>
           <textarea
-            placeholder="write a comment..."
+            placeholder="Ecrivez un commentaire..."
             className={styles.input}
             onChange={(e) => setDesc(e.target.value)}
           />
           <button className={styles.button} onClick={handleSubmit}>
-            Send
+            Envoyer
           </button>
         </div>
       ) : (
-        <Link href="/login">Login to write a comment</Link>
+        <Link href="/login">Connectez-vous pour écrire un commentaire !</Link>
       )}
       <div className={styles.comments}>
         {isLoading
@@ -72,7 +72,13 @@ const Comments = ({ postSlug }) => {
                   )}
                   <div className={styles.userInfo}>
                     <span className={styles.username}>{item.user.name}</span>
-                    <span className={styles.date}>{item.createdAt}</span>
+                    <span className={styles.date}>
+                      {new Date(item.createdAt).toLocaleDateString("fr-FR", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric",
+                      })}
+                    </span>
                   </div>
                 </div>
                 <p className={styles.desc}>{item.desc}</p>

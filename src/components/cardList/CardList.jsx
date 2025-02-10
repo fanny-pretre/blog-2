@@ -37,7 +37,7 @@ const CardList = ({ page, cat }) => {
             60
           ),
         }));
-        setPosts(sanitizedPosts);
+        setPosts(sanitizedPosts.slice(0, 4));
         setCount(count);
       } catch (error) {
         console.error("Error fetching data:", error);
