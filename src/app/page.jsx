@@ -6,8 +6,10 @@ import Featured from "@/components/featured/Featured";
 import Menu from "@/components/menu/Menu";
 import Header from "@/components/header/Header";
 
-export default function Home({ searchParams }) {
-  const page = parseInt(searchParams.page) || 1;
+export default async function Home({ searchParams }) {
+  const resolvedSearchParams = await searchParams; // On attend la résolution
+  const page = parseInt(resolvedSearchParams.page) || 1;
+
   return (
     <div className={styles.container}>
       <Header />

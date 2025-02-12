@@ -10,6 +10,10 @@
   background-color: #ff0045;
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .social {

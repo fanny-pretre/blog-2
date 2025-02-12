@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 
 const getData = async (page, cat) => {
   const res = await fetch(
-    `http://localhost:3000/api/posts?page=${page}&cat=${cat || ""}`,
+    `http://localhost:3000/api/posts?sortByDate=true&page=${page}`,
     {
       cache: "no-store",
     }
@@ -37,7 +37,7 @@ const CardList = ({ page, cat }) => {
             60
           ),
         }));
-        setPosts(sanitizedPosts.slice(0, 4));
+        setPosts(sanitizedPosts);
         setCount(count);
       } catch (error) {
         console.error("Error fetching data:", error);

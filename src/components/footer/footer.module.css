@@ -7,19 +7,19 @@
   color: #fffbf3;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+  width: 100%;
 }
 
 .info {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
 .logoText {
@@ -28,12 +28,6 @@
 
 .desc {
   font-weight: 300;
-}
-
-.icons {
-  margin-top: 10px;
-  display: flex;
-  gap: 10px;
 }
 
 .links {

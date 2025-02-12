@@ -1,46 +1,86 @@
-import { getAuthSession } from "@/utils/auth";
-import prisma from "@/utils/connect";
-import { NextResponse } from "next/server";
+import prisma from "@/utils/connect"; // Connexion à la base de données (Prisma, ici par exemple)
 
 export const GET = async (req) => {
   const { searchParams } = new URL(req.url);
+  const page = parseInt(searchParams.get("page") || "1", 10);
+  const sortByDate = searchParams.get("sortByDate") === "true";
 
-  const page = parseInt(searchParams.get("page") ?? 1);
-  const cat = searchParams.get("cat");
-  const isFeatured = searchParams.get("isFeatured") === "true";
-  const isFavorite = searchParams.get("isFavorite") === "true";
-  const sort = searchParams.get("sort"); // Ajout d'un paramètre pour le tri
-
-  const POST_PER_PAGE = 5;
-
-  const query = {
-    take: POST_PER_PAGE,
-    skip: POST_PER_PAGE * (page - 1),
-    where: {
-      ...(cat && { catSlug: cat }),
-      ...(isFeatured && { isFeatured: true }),
-      ...(isFavorite && { isFavorite: true }),
-    },
-    orderBy:
-      sort === "popular"
-        ? { comments: { _count: "desc" } }
-        : { createdAt: "desc" }, // Tri par popularité ou par date
-    include: {
-      comments: true, // Inclure les commentaires pour pouvoir compter
-    },
-  };
+  const POST_PER_PAGE = 4;
 
   try {
-    const [posts, count] = await prisma.$transaction([
-      prisma.post.findMany(query),
-      prisma.post.count({ where: query.where }),
-    ]);
+    let posts;
+    let count = 0; // Initialise count à zéro par défaut
 
-    return new NextResponse(JSON.stringify({ posts, count }, { status: 200 }));
+    // Si on veut les posts populaires en se basant sur les commentaires
+    if (searchParams.has("popular")) {
+      posts = await prisma.post.findMany({
+        take: POST_PER_PAGE,
+        orderBy: {
+          comments: {
+            _count: "desc", // Tri par nombre de commentaires
+          },
+        },
+        include: {
+          comments: {
+            select: { id: true }, // Inclure les commentaires pour le comptage
+          },
+        },
+      });
+      // Calcul du nombre total de posts populaires
+      count = await prisma.post.count();
+    }
+    // Si on veut les posts marqués comme favoris
+    else if (searchParams.has("favorite")) {
+      posts = await prisma.post.findMany({
+        where: {
+          isFavorite: true,
+        },
+        take: POST_PER_PAGE,
+      });
+      // Calcul du nombre total de posts favoris
+      count = await prisma.post.count({
+        where: {
+          isFavorite: true,
+        },
+      });
+    }
+    // Si on veut les posts avec pagination
+    else if (searchParams.has("page")) {
+      posts = await prisma.post.findMany({
+        skip: POST_PER_PAGE * (page - 1), // Sauter les posts des pages précédentes
+        take: POST_PER_PAGE, // Limiter à un certain nombre de posts
+        orderBy: {
+          createdAt: "desc", // Tri par date de création
+        },
+      });
+      // Calcul du nombre total de posts
+      count = await prisma.post.count();
+    }
+    // Si on veut les posts triés par date
+    else if (sortByDate) {
+      posts = await prisma.post.findMany({
+        take: POST_PER_PAGE,
+        orderBy: {
+          createdAt: "desc", // Tri par date de création
+        },
+      });
+      // Calcul du nombre total de posts triés par date
+      count = await prisma.post.count();
+    }
+    // Si aucune condition n'est spécifiée, retourner tous les posts
+    else {
+      posts = await prisma.post.findMany({
+        take: POST_PER_PAGE, // Limiter à 4 posts par défaut
+      });
+      // Calcul du nombre total de posts
+      count = await prisma.post.count();
+    }
+
+    return new Response(JSON.stringify({ posts, count }), { status: 200 });
   } catch (err) {
-    console.log(err);
-    return new NextResponse(
-      JSON.stringify({ message: "Something went wrong!" }, { status: 500 })
-    );
+    console.error(err);
+    return new Response(JSON.stringify({ message: "Something went wrong!" }), {
+      status: 500,
+    });
   }
 };

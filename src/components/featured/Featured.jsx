@@ -10,9 +10,7 @@ import DOMPurify from "dompurify";
 const getData = async (isFeatured) => {
   const res = await fetch(
     `http://localhost:3000/api/posts?isFeatured=${true}`,
-    {
-      cache: "no-store",
-    }
+    { cache: "force-cache" }
   );
 
   if (!res.ok) {

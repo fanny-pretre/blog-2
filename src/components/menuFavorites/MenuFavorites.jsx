@@ -11,12 +11,12 @@ const MenuFavorites = () => {
   useEffect(() => {
     const fetchFavoritePosts = async () => {
       try {
-        const res = await fetch("/api/posts?isFavorite=true&sort=favorite");
+        const res = await fetch("/api/posts?favorite=true");
         if (!res.ok)
           throw new Error("Erreur lors de la récupération des posts préférés");
 
         const data = await res.json();
-        setPosts(data.posts.slice(0, 5));
+        setPosts(data.posts);
       } catch (error) {
         console.error("Erreur:", error);
       }
