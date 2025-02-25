@@ -2,8 +2,16 @@
   height: 100vh;
 }
 
+.imagePhone {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .container {
+  .image {
     display: none;
+  }
+
+  .imagePhone {
+    display: block;
   }
 }

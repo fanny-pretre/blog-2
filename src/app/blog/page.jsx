@@ -1,4 +1,4 @@
-import CardList from "@/components/cardList/CardList";
+import BlogList from "@/components/blogList/blogList";
 import styles from "./blogPage.module.css";
 import Menu from "@/components/Menu/Menu";
 
@@ -10,7 +10,7 @@ const BlogPage = ({ searchParams }) => {
     <div className={styles.container}>
       <h1 className={styles.title}> Nos projets {cat} </h1>
       <div className={styles.content}>
-        <CardList page={page} cat={cat} />
+        <BlogList page={page} cat={cat} />
         <Menu />
       </div>
     </div>

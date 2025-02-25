@@ -65,7 +65,14 @@
   }
 }
 @media screen and (max-width: 640px) {
+  .container {
+    padding: 10px 20px;
+  }
   .links {
+    display: none;
+  }
+
+  .desc {
     font-size: 14px;
   }
 }

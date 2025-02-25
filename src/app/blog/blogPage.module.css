@@ -1,8 +1,11 @@
+.container {
+  padding-top: 3rem;
+}
+
 .title {
   background-color: #ffcad3;
   color: white;
   text-align: center;
-  margin-top: 20px;
   border-radius: 12px;
   padding: 20px 10px;
   text-transform: uppercase;
@@ -13,4 +16,10 @@
 .content {
   display: flex;
   gap: 50px;
+}
+
+@media screen and (max-width: 1280px) {
+  .title {
+    font-size: 2rem;
+  }
 }

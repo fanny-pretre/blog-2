@@ -7,6 +7,12 @@ const Header = async () => {
       <div className={styles.post}>
         <div className={styles.imgContainer}>
           <Image src="/header.png" alt="header" fill className={styles.image} />
+          <Image
+            src="/header-phone.png"
+            alt="header"
+            fill
+            className={styles.imagePhone}
+          />
         </div>
       </div>
     </div>
