@@ -11,8 +11,18 @@ export const GET = async (req) => {
     let posts;
     let count = 0; // Initialise count à zéro par défaut
 
-    // Si on veut les posts populaires en se basant sur les commentaires
-    if (searchParams.has("popular")) {
+    if (searchParams.has("catSlug")) {
+      posts = await prisma.post.findMany({
+        where: {
+          catSlug: searchParams.get("catSlug"),
+        },
+      });
+      // Calcul du nombre total de posts
+      count = await prisma.post.count();
+    }
+
+    // Si on veut les posts marqués comme favoris
+    else if (searchParams.has("popular")) {
       posts = await prisma.post.findMany({
         take: POST_PER_PAGE,
         orderBy: {

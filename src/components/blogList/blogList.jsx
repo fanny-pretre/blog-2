@@ -8,12 +8,9 @@ import DOMPurify from "dompurify";
 import { useState, useEffect } from "react";
 
 const getData = async (page, cat) => {
-  const res = await fetch(
-    `http://localhost:3000/api/posts?sortByDate=true&page=${page}`,
-    {
-      cache: "no-store",
-    }
-  );
+  const res = await fetch(`http://localhost:3000/api/posts?catSlug=${cat}`, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
     throw new Error("Failed");
