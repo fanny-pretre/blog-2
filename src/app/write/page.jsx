@@ -64,6 +64,14 @@ const WritePage = () => {
       .replace(/^-+|-+$/g, "");
 
   const handleSubmit = async () => {
+    console.log({
+      title,
+      desc: value,
+      img: media, // Assure-toi que `media` est bien l'URL de l'image
+      slug: slugify(title),
+      catSlug: catSlug || "divers",
+    });
+
     const res = await fetch("/api/posts", {
       method: "POST",
       body: JSON.stringify({
@@ -71,7 +79,7 @@ const WritePage = () => {
         desc: value,
         img: media, // Utilisation de l'URL de l'image téléchargée
         slug: slugify(title),
-        catSlug: catSlug || "style",
+        catSlug: catSlug || "divers",
       }),
     });
 
@@ -93,12 +101,7 @@ const WritePage = () => {
         className={styles.select}
         onChange={(e) => setCatSlug(e.target.value)}
       >
-        <option value="style">style</option>
-        <option value="fashion">fashion</option>
-        <option value="food">food</option>
-        <option value="culture">culture</option>
-        <option value="travel">travel</option>
-        <option value="coding">coding</option>
+        <option value="divers">divers</option>
       </select>
       <div className={styles.editor}>
         <button className={styles.button} onClick={() => setOpen(!open)}>
