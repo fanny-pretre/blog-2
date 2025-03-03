@@ -1,7 +1,9 @@
-import styles from "./categoryList.module.css";
+"use client";
 
+import styles from "./categoryList.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const getData = async () => {
   const res = await fetch("http://localhost:3000/api/categories", {
@@ -14,8 +16,14 @@ const getData = async () => {
 
   return res.json();
 };
-const CategoryList = async () => {
-  const data = await getData();
+
+const CategoryList = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getData().then(setData).catch(console.error);
+  }, []);
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Nos catégories stars</h1>
@@ -28,6 +36,7 @@ const CategoryList = async () => {
             }}
             className={`${styles.category} ${styles[item.slug]}`}
             key={item.id}
+            onClick={() => window.scrollTo(0, 0)}
           >
             {item.img && (
               <Image

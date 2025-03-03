@@ -6,6 +6,26 @@
   display: none;
 }
 
+.scrollIndicator {
+  position: absolute;
+  bottom: 20px; /* Ajuste selon ton design */
+  left: 50%;
+  transform: translateX(-50%);
+  animation: moveDown 1.5s ease-in-out infinite; /* Animation de mouvement vers le bas */
+}
+
+@keyframes moveDown {
+  0% {
+    transform: translateX(-50%) translateY(0); /* Position initiale */
+  }
+  50% {
+    transform: translateX(-50%) translateY(10px); /* Mouvement vers le bas */
+  }
+  100% {
+    transform: translateX(-50%) translateY(0); /* Retour à la position initiale */
+  }
+}
+
 @media (max-width: 768px) {
   .image {
     display: none;
