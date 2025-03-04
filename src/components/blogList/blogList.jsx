@@ -13,7 +13,7 @@ const getData = async (page, cat) => {
   });
 
   if (!res.ok) {
-    throw new Error("Failed");
+    throw new Error("Failed to fetch posts");
   }
 
   return res.json();
@@ -22,11 +22,18 @@ const getData = async (page, cat) => {
 const BlogList = ({ page, cat }) => {
   const [posts, setPosts] = useState([]);
   const [count, setCount] = useState(0);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { posts, count } = await getData(page, cat);
+        if (posts.length === 0) {
+          setError(true);
+        } else {
+          setError(false);
+        }
+
         const sanitizedPosts = posts.map((post) => ({
           ...post,
           desc: DOMPurify.sanitize(post.desc, { ALLOWED_TAGS: [] }).substring(
@@ -34,10 +41,12 @@ const BlogList = ({ page, cat }) => {
             60
           ),
         }));
+
         setPosts(sanitizedPosts);
         setCount(count);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setError(true);
       }
     };
 
@@ -48,14 +57,31 @@ const BlogList = ({ page, cat }) => {
   const hasPrev = POST_PER_PAGE * (page - 1) > 0;
   const hasNext = POST_PER_PAGE * (page - 1) + POST_PER_PAGE < count;
 
+  // Désactivation de "Suivant" si moins de 4 articles
+  const isNextDisabled = posts.length < POST_PER_PAGE;
+
   return (
     <div className={styles.container}>
-      <div className={styles.posts}>
-        {posts?.map((item) => (
-          <Card item={item} key={item.id} />
-        ))}
-      </div>
-      <Pagination page={page} hasNext={hasNext} hasPrev={hasPrev} />
+      {error ? (
+        <p className={styles.errorMessage}>
+          Aucun article trouvé pour cette catégorie.
+        </p>
+      ) : (
+        <>
+          <div className={styles.posts}>
+            {posts?.map((item) => (
+              <Card item={item} key={item.id} />
+            ))}
+          </div>
+          {count > 0 && (
+            <Pagination
+              page={page}
+              hasNext={hasNext && !isNextDisabled}
+              hasPrev={hasPrev}
+            />
+          )}
+        </>
+      )}
     </div>
   );
 };

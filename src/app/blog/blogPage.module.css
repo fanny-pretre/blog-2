@@ -16,6 +16,8 @@
 .content {
   display: flex;
   gap: 50px;
+  margin-top: 1.5rem;
+  min-height: 35vh;
 }
 
 @media screen and (max-width: 1280px) {

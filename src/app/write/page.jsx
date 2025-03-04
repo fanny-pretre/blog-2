@@ -22,10 +22,12 @@ const WritePage = () => {
   const [title, setTitle] = useState("");
   const [catSlug, setCatSlug] = useState("");
 
+  console.log(catSlug);
+
   // Initialisation de Quill avec le thème "bubble"
   const { quill, quillRef } = useQuill({
     theme: "bubble",
-    placeholder: "Tell your story...",
+    placeholder: "Qu'avez-vous à raconter aujourd'hui ?",
   });
 
   // Synchronisation de l'état lorsque le contenu de l'éditeur change
@@ -102,6 +104,11 @@ const WritePage = () => {
         onChange={(e) => setCatSlug(e.target.value)}
       >
         <option value="divers">divers</option>
+        <option value="crochet">crochet</option>
+        <option value="tricot">tricot</option>
+        <option value="amigurumi">amigurumi</option>
+        <option value="couture">couture</option>
+        <option value="cadeau">cadeau</option>
       </select>
       <div className={styles.editor}>
         <button className={styles.button} onClick={() => setOpen(!open)}>
@@ -119,12 +126,6 @@ const WritePage = () => {
               <label htmlFor="image">
                 <Image src="/image.png" alt="" width={16} height={16} />
               </label>
-            </button>
-            <button className={styles.addButton}>
-              <Image src="/external.png" alt="" width={16} height={16} />
-            </button>
-            <button className={styles.addButton}>
-              <Image src="/video.png" alt="" width={16} height={16} />
             </button>
           </div>
         )}

@@ -1,3 +1,8 @@
+.container {
+  margin: 0 auto;
+  padding: 30px 0px;
+}
+
 .infoContainer {
   display: flex;
   align-items: center;
@@ -7,6 +12,7 @@
 
 .textContainer {
   flex: 1.5;
+  width: 100%;
 }
 
 .title {
@@ -44,7 +50,6 @@
 }
 
 .imageContainer {
-  flex: 1;
   height: 350px;
   position: relative;
 }
@@ -103,13 +108,24 @@
   }
 }
 @media screen and (max-width: 1024px) {
+  .infoContainer {
+    display: flex;
+    flex-direction: column;
+  }
   .imageContainer {
-    display: none;
+    height: 50vh;
+    width: 80vw;
+  }
+  .title {
+    font-size: 64px;
+    margin-bottom: 50px;
   }
 }
 @media screen and (max-width: 640px) {
   .title {
     font-size: 36px;
+
+    margin-bottom: 10px;
   }
 
   .description p {

@@ -31,11 +31,24 @@ const Comments = ({ postSlug }) => {
   const [desc, setDesc] = useState("");
 
   const handleSubmit = async () => {
-    await fetch("/api/comments", {
-      method: "POST",
-      body: JSON.stringify({ desc, postSlug }),
-    });
-    mutate();
+    try {
+      const response = await fetch("/api/comments", {
+        method: "POST",
+        body: JSON.stringify({ desc, postSlug }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setDesc(""); // Réinitialise seulement après une soumission réussie
+        mutate(); // Met à jour les commentaires
+      } else {
+        throw new Error("La soumission a échoué");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -47,7 +60,9 @@ const Comments = ({ postSlug }) => {
             placeholder="Ecrivez un commentaire..."
             className={styles.input}
             onChange={(e) => setDesc(e.target.value)}
+            value={desc}
           />
+
           <button className={styles.button} onClick={handleSubmit}>
             Envoyer
           </button>

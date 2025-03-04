@@ -67,10 +67,7 @@ function About() {
           <p>
             L&apos; objectif principal de Hook&apos;CŒUR est de partager ma
             passion pour le crochet et de vous inspirer à créer des pièces
-            uniques, même si vous êtes à la recherche d’un moyen créatif et
-            détendant d&apos; occuper vos mains. J&apos; espère que ce blog
-            pourra être une source d&apos;idées et de motivation pour ceux qui
-            veulent se lancer dans cette activité apaisante.
+            uniques.
           </p>
         </li>
         <li className={styles.item}>

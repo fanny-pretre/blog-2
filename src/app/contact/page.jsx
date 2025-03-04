@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./contactPage.module.css";
 import Image from "next/image";
 
@@ -19,21 +21,36 @@ export default function ContactForm() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name,
-        lastName,
-        email,
-        subject,
-        message,
-      }),
+      body: JSON.stringify({ name, lastName, email, subject, message }),
     });
 
     const data = await response.json();
 
     if (data.message === "Email envoyé avec succès !") {
-      alert("Votre message a bien été envoyé.");
+      toast.success(" 🧶 Votre message a bien été envoyé ! 🧶", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+
+      // Réinitialiser les inputs après l'envoi
+      setName("");
+      setLastName("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
     } else {
-      alert("Une erreur est survenue. Veuillez réessayer.");
+      toast.error("Une erreur est survenue. Veuillez réessayer.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   };
 
@@ -97,7 +114,13 @@ export default function ContactForm() {
         </button>
       </form>
       <div>
-        <Image src="/p1.jpeg" alt="" width={400} height={550} />
+        <Image
+          src="/p1.jpeg"
+          alt=""
+          width={400}
+          height={550}
+          className={styles.formImage}
+        />
       </div>
     </div>
   );
